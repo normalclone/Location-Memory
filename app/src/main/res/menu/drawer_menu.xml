@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view"
+    >
+    <item android:title="@string/history">
+        <menu>
+            <item android:id="@+id/open_list_location"
+                android:title="@string/open_list_location"/>
+            <item android:id="@+id/open_list_memory"
+                android:title="@string/open_list_memory"/>
+        </menu>
+    </item>
+
+    <item android:title="@string/about">
+        <menu>
+            <item
+                android:id="@+id/how_to_use"
+                android:title="@string/how_to_use"/>
+            <item
+                android:id="@+id/get_app_info"
+                android:title="@string/get_app_info"/>
+            <item
+                android:id="@+id/get_auth_info"
+                android:title="@string/author_information"
+                />
+        </menu>
+    </item>
+
+    <item android:title="@string/tool">
+        <menu>
+            <item
+                android:id="@+id/setting"
+                android:title="@string/setting"/>
+        </menu>
+    </item>
+</menu>

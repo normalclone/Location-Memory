@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="16dp"
+    android:id="@+id/container"
+    android:foreground="?attr/selectableItemBackground"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_weight="1"
+            android:id="@+id/circleView"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/ic_pin_drop_black_24dp" />
+
+        <TextView
+            android:text="Location 1"
+            android:id="@+id/tv_location_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="30"
+            android:textSize="16dp"
+            android:layout_marginBottom="4dp"
+            android:textColor="@color/colorPrimary" />
+
+        <ImageButton
+            android:id="@+id/btn_remove"
+            android:layout_weight="1"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:gravity="end"
+            android:layout_gravity="end"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/ic_clear" />
+
+    </LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>

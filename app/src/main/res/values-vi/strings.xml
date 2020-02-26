@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--    navigation-->
+    <string name="list_stop">Danh sách điểm dừng</string>
+    <string name="close">Đóng</string>
+    <string name="add_to_stop_list_fail">Tối đa chỉ được 3 tọa độ</string>
+    <string name="latlng">Tọa độ: </string>
+    <string name="map_stop">Điểm dừng</string>
+    <string name="add_to_stop_list">Thêm điểm dừng thành công</string>
+    <string name="nav_cancel">Đã hủy</string>
+
+    <!--    memory detail-->
+    <string name="memory_edit_title">Điền thông tin</string>
+    <string name="delete">Xóa</string>
+    <string name="zero_result">Không có kết quả từ Google</string>
+    <string name="out_of_api">API đã bị giới hạn</string>
+
+    <string name="search_saved_data">Từ địa điểm đã lưu</string>
+    <string name="search_google_data">Từ Google</string>
+    <!--    location detail-->
+    <string name="location_info">Th.Tin</string>
+    <string name="list_memories">Kỉ niệm</string>
+    <string name="location_images">Ảnh</string>
+    <string name="edit_this_location">Sửa Thông Tin</string>
+    <string name="confirm">Xác nhận</string>
+    <string name="change_success">Sửa thông tin thành công!</string>
+    <string name="change_fail">Sửa thông tin thất bại!</string>
+
+    <string name="edit_picture">Chỉnh sửa ảnh</string>
+    <string name="delete_picture">Xóa ảnh</string>
+
+    <string name="label_brush">Độ dày</string>
+    <string name="label_emoji">Emoji</string>
+    <string name="label_sticker">Nhãn dán</string>
+    <string name="label_eraser">Tẩy</string>
+    <string name="label_eraser_mode">Chế độ Tẩy</string>
+    <string name="label_text">Văn bản</string>
+    <string name="label_filter">Bộ lọc</string>
+    <string name="label_adjust">Điều chỉnh</string>
+    <string name="msg_save_image">Ảnh chưa được lưu, bạn chắc chứ?</string>
+    <string name="app_intent_name">Bộ chỉnh ảnh</string>
+    <string name="msg_save_image_to_share">Hãy lưu ảnh trước đã!</string>
+    <string name="msg_share_image">Chia sẻ</string>>
+
+    <!--    list activity-->
+    <string name="save_img_success">Lưu thành công</string>
+    <string name="save_img_fail">Lưu ảnh thất bại</string>
+    <string name="save">Lưu ảnh</string>
+    <string name="discard">Bỏ</string>
+    <string name="loading">Đang tải...</string>
+    <string name="failure">Thất bại</string>
+    <string name="success">Thành công</string>
+    <string name="ask_delete_picture">Bạn có chắc chắn muốn xóa bức ảnh này không?</string>
+    <string name="list_location">Danh sách địa điểm</string>
+    <string name="list_memory">Danh sách kỉ niệm</string>
+    <string name="are_you_sure">Bạn chắc chứ?</string>
+    <string name="notice">Thông báo</string>
+    <string name="yes">Có</string>
+    <string name="no">Không</string>
+    <string name="edit">Sửa</string>
+    <string name="ok">OK</string>
+    <string name="menu_item_title">Điền tên mới</string>
+    <string name="menu_item_delete_confirm">Xóa địa điểm sẽ xóa tất cả các kỉ niệm trong đó</string>
+
+    <!--    main activity-->
+    <string name="history">Lịch sử</string>
+    <string name="about">Thông tin</string>
+    <string name="tool">Công cụ</string>
+    <string name="setting">Cài đặt</string>
+    <string name="hint_search">Tìm kiếm...</string>
+    <string name="tooltip_fab_save_location">Lưu địa điểm                   </string>
+    <string name="open_list_location">Mở danh sách địa điểm</string>
+    <string name="open_list_memory">Mở danh sách kỉ niệm</string>
+    <string name="get_app_info">Thông tin ứng dụng</string>
+    <string name="how_to_use">Hướng dẫn sử dụng?</string>
+    <string name="author_information">Thông tin tác giả</string>
+    <string name="dialog_location_nearby_title">Tìm thấy vài địa điểm đã được ở lưu gần đây</string>
+    <string name="dialog_location_nearby_message">Chọn một nếu bạn muốn ghi đè địa điểm lân cận.</string>
+    <string name="dialog_location_nearby_pass_button">Không, tạo mới</string>
+    <string name="DD">NKP: </string>
+    <string name="location_turn_off">Định vị đang tắt.</string>
+    <string name="location_turn_off_positive">Bật lên</string>
+    <string name="no_permission">Không có quyền! Tự động tắt</string>
+
+    <!--    activity add location-->
+    <string name="save_location_toolbar_add">Thêm địa điểm</string>
+    <string name="save_location_toolbar_edit">Sửa địa điểm</string>
+    <string name="hint_location_name">Tên địa điểm</string>
+    <string name="hint_discovery_date">Ngày khám phá</string>
+    <string name="save_this_location">Lưu địa điểm này!</string>
+    <string name="err_location_required">Tên địa điểm không được bỏ trống!</string>
+    <string name="err_created_at_required">Sai định dạng ngày giờ!</string>
+    <string name="rs_success_save_location">Thành công lưu địa điểm: </string>
+    <string name="rs_success_override_location">Thành công ghi đè địa điểm: </string>
+    <string name="rs_fail_save_location">Thất bại lưu địa điểm: </string>
+    <string name="rs_fail_override_location">Thất bại ghi đè địa điểm </string>
+
+    <!--    activity add memory-->
+    <string name="save_memory_toolbar_add">Thêm kỉ niệm</string>
+    <string name="save_memory_toolbar_edit">Sửa địa điểm</string>
+    <string name="hint_memory_title">Tiêu đề</string>
+    <string name="hint_memory_content">Nói một chút về kỉ niệm này..</string>
+    <string name="tooltip_memory_add_image">Thêm ảnh</string>
+    <string name="save_this_memory">Lưu kỉ niệm này!</string>
+    <string name="err_memory_title_required">Tiêu đề không được bỏ trống!</string>
+    <string name="rs_success_save_memory">Thành công lưu kỉ niệm: </string>
+    <string name="dialog_add_picture_title">Thêm ảnh</string>
+    <string name="camera">Máy ảnh</string>
+    <string name="gallery">Bộ sưu tập</string>
+    <string name="cancel">Hủy</string>
+</resources>

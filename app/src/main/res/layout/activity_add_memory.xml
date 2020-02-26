@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        app:navigationIcon="@drawable/ic_keyboard_backspace_black_24dp"
+        app:title="@string/save_memory_toolbar_add"
+        android:background="@color/colorEmpty"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edtlo_location_name"
+            app:errorEnabled="true"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:startIconDrawable="@drawable/ic_location_on_black_24dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:hint="@string/hint_location_name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:enabled="false"
+                android:textColor="#000"
+                android:id="@+id/edt_location_name"
+                android:background="@color/colorEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edtlo_created_at"
+            app:errorEnabled="true"
+            app:errorIconDrawable="@null"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:endIconMode="custom"
+            app:endIconDrawable="@drawable/ic_edit_black_24dp"
+            app:endIconContentDescription="Edit datetime"
+            app:startIconDrawable="@drawable/ic_alarm_black_24dp"
+            android:hint="@string/hint_discovery_date">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:enabled="false"
+                android:textColor="#000"
+                android:background="@color/colorEmpty"
+                android:id="@+id/edt_created_at"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/circleView"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorEmpty" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edtlo_title"
+            app:errorEnabled="true"
+            android:layout_margin="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:hint="@string/hint_memory_title">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edtlo_content"
+            app:errorEnabled="true"
+            android:layout_margin="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:hint="@string/hint_memory_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:inputType="textMultiLine"
+                android:lines="6"
+                android:gravity="top|left"
+                android:id="@+id/edt_content"
+                android:overScrollMode="always"
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical"
+                android:scrollHorizontally="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <HorizontalScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginTop="12dp"
+            android:paddingLeft="12dp"
+            android:paddingStart="12dp">
+            <LinearLayout
+                android:id="@+id/image_zone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <ImageButton
+                    android:id="@+id/btn_add_image"
+                    android:tooltipText="@string/tooltip_memory_add_image"
+                    android:src="@drawable/ic_add_a_photo_black_24dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:foreground="@drawable/ripple_rect"
+                    android:background="@drawable/empty_rectangle" />
+            </LinearLayout>
+
+        </HorizontalScrollView>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_save_memory"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_margin="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:strokeColor="#000"
+            android:text="@string/save_this_memory"/>
+
+        </LinearLayout>
+</RelativeLayout>
