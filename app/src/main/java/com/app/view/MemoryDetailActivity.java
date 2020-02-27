@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -27,6 +29,7 @@ import com.app.dao.MemoryDAO;
 import com.app.dao.tLocationDAO;
 import com.app.model.Memory;
 import com.app.util.DateTimeUtil;
+import com.app.util.WindowUtil;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -43,7 +46,6 @@ public class MemoryDetailActivity extends AppCompatActivity{
     private Memory memory;
     private int yy, MM, dd;
     private int year, month, day, hour, minute;
-    private String createdAt;
 
 
     @Override
@@ -51,6 +53,12 @@ public class MemoryDetailActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_memory_detail);
         memory = new MemoryDAO(this).get(getIntent().getIntExtra("id", 1));
+
+        //Status bar
+        RelativeLayout container = findViewById(R.id.expandView);
+        LinearLayout.LayoutParams containerParam = (LinearLayout.LayoutParams) container.getLayoutParams();
+        containerParam.topMargin = WindowUtil.getStatusBarHeight(this);
+        container.setLayoutParams(containerParam);
 
         tvTitle = findViewById(R.id.tv_title_name);
         tvCreatedAt = findViewById(R.id.tv_created_at);
@@ -77,7 +85,6 @@ public class MemoryDetailActivity extends AppCompatActivity{
                 View viewInflated = inflater.inflate(R.layout.edit_memory_dialog, null);
                 final TextInputLayout tl_createdAt = viewInflated.findViewById(R.id.edtlo_created_at);
                 final TextInputLayout tl_title = viewInflated.findViewById(R.id.edtlo_title);
-                final TextInputLayout tl_content = viewInflated.findViewById(R.id.edtlo_content);
                 final TextInputEditText edt_createdAt = viewInflated.findViewById(R.id.edt_created_at);
                 final TextInputEditText edt_title = viewInflated.findViewById(R.id.edt_title);
                 final TextInputEditText edt_content = viewInflated.findViewById(R.id.edt_content);
