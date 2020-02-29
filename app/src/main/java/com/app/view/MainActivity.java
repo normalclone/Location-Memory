@@ -22,6 +22,7 @@ import androidx.transition.TransitionManager;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -80,14 +81,12 @@ import com.app.util.PlaceUtil;
 import com.app.util.SystemUtil;
 import com.app.util.TransitionUtil;
 import com.app.util.WindowUtil;
-import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.api.directions.v5.models.DirectionsResponse;
 import com.mapbox.api.directions.v5.models.DirectionsRoute;
-import com.mapbox.api.directions.v5.models.RouteOptions;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.IconFactory;
@@ -108,11 +107,8 @@ import com.mapbox.services.android.navigation.ui.v5.route.NavigationMapRoute;
 import com.mapbox.services.android.navigation.v5.navigation.NavigationRoute;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+import com.victor.loading.rotate.RotateLoading;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -121,6 +117,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, PermissionsListener, MapboxMap.OnMapClickListener , NavigationView.OnNavigationItemSelectedListener{
+    private int LAUNCH_SEEDETAIL_ACTIVITY = 12;
     //Core declaration
     private LocationManager locationManager;
 
@@ -145,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private FloatingActionButton fab_directionList;
     private FloatingActionButton fab_directorCancel;
     private FloatingActionButton fab_startNavigating;
+    private RotateLoading fab_searchLoading;
 
     private EditText edt_search;
     private Toolbar toolbar;
@@ -171,6 +169,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private List<tLocation> savedLocations;
     private Location currentLocation;
     private List<tLocation> nearLocations;
+
+    private Marker desMarker;
+    private Location currentMapClickLocation;
+    private NavigationMapRoute navigationMapRoute;
+    private List<Location> listNavStop;
+    private boolean f_isNavigationMode = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -250,10 +254,24 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         btn_search = findViewById(R.id.search_button);
         btn_search.setOnClickListener(btn_searchClicked);
+        fab_searchLoading =(RotateLoading) findViewById(R.id.rotateloading);
+        fab_searchLoading.setVisibility(View.INVISIBLE);
 
         //View
         rippleView = findViewById(R.id.ripple_view);
         searchRecyclerViewHolder = findViewById(R.id.search_recycler_view_holder);
+    }
+    //Search loading
+    public  void startSearchingLoading(){
+        btn_search.setVisibility(View.INVISIBLE);
+        fab_searchLoading.setVisibility(View.VISIBLE);
+        fab_searchLoading.start();
+    }
+
+    public void stopSearchingLoading(){
+        fab_searchLoading.stop();
+        fab_searchLoading.setVisibility(View.INVISIBLE);
+        btn_search.setVisibility(View.VISIBLE);
     }
 
     //Override back button
@@ -261,8 +279,47 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if(f_isSearchFocused){
             edt_search.clearFocus();
             initUnfocusedToolbarParams();
+        }else if(drawerLayout.isDrawerOpen(Gravity.LEFT)){
+            drawerLayout.closeDrawer(Gravity.LEFT);
+        }else{
+            super.onBackPressed();
         }
     }
+
+    //Override activity result
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode,data);
+        if (requestCode == LAUNCH_SEEDETAIL_ACTIVITY) {
+            if(resultCode == Activity.RESULT_OK){
+                Double lat = data.getDoubleExtra("lat",1);
+                Double lng = data.getDoubleExtra("lng", 1);
+                Location temp = new Location("Target location");
+                temp.setLatitude(lat);
+                temp.setLongitude(lng);
+                if(MapboxUtil.calculateBetween2Location(temp, currentLocation)>10){
+                    listNavStop = new ArrayList<>();
+                    listNavStop.add(currentLocation);
+                    listNavStop.add(temp);
+
+                    f_isNavigationMode = true;
+                    TransitionUtil.navigationModeFabSlideIn(fab_directorCancel, fab_directionList, fab_addStop, fab_startNavigating);
+
+                    if(!fab_directionList.isEnabled() && listNavStop.size() > 0) {
+                        fab_directionList.setEnabled(true);
+                        TransitionUtil.fabHalfFadeIn(fab_directionList);
+                    }
+
+                    if(listNavStop != null && listNavStop.size() > 1) getRoute(listNavStop);
+                }else{
+                    Toast.makeText(MainActivity.this, getString(R.string.distance_not_allow_director), Toast.LENGTH_LONG).show();
+                }
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+    }//onActivityResult
 
     //EditText Event
     private View.OnFocusChangeListener edt_searchFocused = new View.OnFocusChangeListener() {
@@ -533,7 +590,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         if(currentShowedDialog.isShowing()) currentShowedDialog.dismiss();
         MapboxUtil.flyToLocation(temp.getLatitude(), temp.getLongitude(), mapboxMap);
     }
-    public void dissmistDialogAndDisableFabDirectorList(){
+    public void dismissDialogAndDisableFabDirectorList(){
         if(currentShowedDialog.isShowing()) currentShowedDialog.dismiss();
         fab_directionList.setEnabled(false);
         TransitionUtil.fabHalfFadeOut(fab_directionList);
@@ -593,8 +650,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             TransitionUtil.fabHalfFadeOut(fab_addStop);
             TransitionUtil.fabHalfFadeOut(fab_directionList);
             TransitionUtil.fabHalfFadeOut(fab_startNavigating);
-            mapboxMap.removeMarker(desMarker);
-
+            if(desMarker != null){
+                mapboxMap.removeMarker(desMarker);
+            }
             if(navigationMapRoute!=null){
                 navigationMapRoute.removeRoute();
             }
@@ -875,8 +933,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 super.onAnimationEnd(animation);
                 Intent i = new Intent(MainActivity.this, LocationDetailActivity.class);
                 i.putExtra("locationId", locationId);
-                ActivityCompat.startActivity(MainActivity.this,
-                        i,
+                ActivityCompat.startActivityForResult(MainActivity.this,
+                        i,LAUNCH_SEEDETAIL_ACTIVITY,
                         ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this).toBundle());
                 rippleView.setVisibility(View.VISIBLE);
                 selectedMarkerHolder.setVisibility(View.INVISIBLE);
@@ -1055,11 +1113,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         fab_LocationWidth = fab_saveLocation.getWidth();
     }
 
-    private Location currentMapClickLocation;
-    private NavigationMapRoute navigationMapRoute;
-    private List<Location> listNavStop;
-    private Marker desMarker;
-    private boolean f_isNavigationMode = false;
     @Override
     public boolean onMapClick(@NonNull LatLng point) {
         if(f_isNavigationMode){

@@ -18,6 +18,7 @@ import com.app.R;
 import com.app.dao.tLocationDAO;
 import com.app.model.tLocation;
 import com.app.util.DateTimeUtil;
+import com.app.view.LocationDetailActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -28,10 +29,12 @@ import java.util.Calendar;
 public class ChildOfLocationInfoFragment extends RecyclerView.Adapter<ChildOfLocationInfoFragment.ViewHolder>{
     private Context mContext;
     private int locationId;
+    private LocationDetailActivity activity;
 
-    public ChildOfLocationInfoFragment(Context mContext, int locationId){
+    public ChildOfLocationInfoFragment(Context mContext, int locationId, LocationDetailActivity activity){
         this.mContext = mContext;
         this.locationId = locationId;
+        this.activity =activity;
     }
     @NonNull
     @Override
@@ -57,6 +60,7 @@ public class ChildOfLocationInfoFragment extends RecyclerView.Adapter<ChildOfLoc
         private TextInputEditText edt_createdAt;
 
         private MaterialButton btn_save;
+        private MaterialButton btn_navigation;
         tLocation location;
 
         private int yy, MM, dd;
@@ -69,6 +73,7 @@ public class ChildOfLocationInfoFragment extends RecyclerView.Adapter<ChildOfLoc
             edt_createdAt = view.findViewById(R.id.edt_created_at);
             edt_locationName = (TextInputEditText) view.findViewById(R.id.edt_location_name);
             btn_save = view.findViewById(R.id.btn_save_location);
+            btn_navigation = view.findViewById(R.id.btn_director);
         }
 
         void bind(ViewHolder holder,int position) {
@@ -85,8 +90,23 @@ public class ChildOfLocationInfoFragment extends RecyclerView.Adapter<ChildOfLoc
 
             edtlo_createdAt.setEndIconOnClickListener(removedClick);
             btn_save.setOnClickListener(enableEdit);
-
+            btn_navigation.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    activity.closeAndStartNavigator();
+                }
+            });
         }
+
+        private View.OnClickListener navigation = new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                btn_save.setText(mContext.getString(R.string.confirm));
+                btn_save.setOnClickListener(changeLocationInformation);
+                edtlo_locationName.setEnabled(true);
+                edtlo_createdAt.setEndIconOnClickListener(pickDateTimeClicked);
+            }
+        };
 
         private View.OnClickListener enableEdit = new View.OnClickListener(){
             @Override

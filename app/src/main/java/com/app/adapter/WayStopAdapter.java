@@ -60,7 +60,7 @@ public class WayStopAdapter extends ArrayAdapter<Location> {
                 activity.refreshRoute();
                 notifyDataSetChanged();
                 if(list.size() == 1) activity.DisableFabStartNavigation();
-                if(list.size() == 0) activity.dissmistDialogAndDisableFabDirectorList();
+                if(list.size() == 0) activity.dismissDialogAndDisableFabDirectorList();
             }
         });
         viewHolder.container.setOnClickListener(new View.OnClickListener() {

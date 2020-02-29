@@ -1,5 +1,7 @@
 package com.app.view;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -46,6 +48,8 @@ public class LocationDetailActivity extends AppCompatActivity {
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Intent returnIntent = getIntent();
+                    setResult(Activity.RESULT_CANCELED, returnIntent);
                     finish();
                 }
             });
@@ -59,7 +63,7 @@ public class LocationDetailActivity extends AppCompatActivity {
             public Fragment getItem(int position) {
                 switch (position % 3) {
                     case 0:
-                        return LocationInfoFragment.newInstance(location_id);
+                        return LocationInfoFragment.newInstance(location_id, LocationDetailActivity.this);
                     case 1:
                         return ListMemoryFragment.newInstance(location_id);
                     default:
@@ -96,6 +100,14 @@ public class LocationDetailActivity extends AppCompatActivity {
         });
         mViewPager.getViewPager().setOffscreenPageLimit(mViewPager.getViewPager().getAdapter().getCount());
         mViewPager.getPagerTitleStrip().setViewPager(mViewPager.getViewPager());
+    }
+
+    public void closeAndStartNavigator(){
+        Intent returnIntent = getIntent();
+        returnIntent.putExtra("lat",location.getLocation().getLatitude());
+        returnIntent.putExtra("lng",location.getLocation().getLongitude());
+        setResult(Activity.RESULT_OK,returnIntent);
+        finish();
     }
 
     private Drawable randomDrawable(){

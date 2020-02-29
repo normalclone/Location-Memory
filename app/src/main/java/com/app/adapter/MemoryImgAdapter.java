@@ -21,6 +21,7 @@ import com.app.R;
 import com.app.dao.ImgDAO;
 import com.app.model.Img;
 import com.app.photoEditor.EditImageActivity;
+import com.app.view.DisplayImageActivity;
 import com.app.view.MemoryDetailActivity;
 
 import java.util.List;
@@ -64,6 +65,14 @@ public class MemoryImgAdapter extends RecyclerView.Adapter<MemoryImgAdapter.View
         public void bind(final ViewHolder holder, final int position) {
             final Img temp = list.get(position);
             imageView.setImageURI(Uri.parse("file://"+temp.getLink()));
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(mContext, DisplayImageActivity.class);
+                    i.putExtra("uri", "file://"+temp.getLink());
+                    mContext.startActivity(i);
+                }
+            });
             btn_edit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

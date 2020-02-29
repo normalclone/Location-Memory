@@ -69,7 +69,6 @@ public class PlaceUtil {
 
         protected void onPreExecute() {
             super.onPreExecute();
-
             pd = new ProgressDialog(context);
             pd.setMessage(context.getString(R.string.loading));
             pd.setCancelable(false);
@@ -155,11 +154,7 @@ public class PlaceUtil {
 
         protected void onPreExecute() {
             super.onPreExecute();
-
-            pd = new ProgressDialog(context);
-            pd.setMessage("Please wait");
-            pd.setCancelable(false);
-            pd.show();
+            activity.startSearchingLoading();
         }
 
         protected String doInBackground(String... params) {
@@ -212,9 +207,7 @@ public class PlaceUtil {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            if (pd.isShowing()){
-                pd.dismiss();
-            }
+            activity.stopSearchingLoading();
             JSONObject jsonRs = null;
             List<Place> list = new ArrayList<Place>();
             try {

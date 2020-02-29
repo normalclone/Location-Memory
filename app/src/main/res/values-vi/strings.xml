@@ -18,6 +18,7 @@
 
     <string name="search_saved_data">Từ địa điểm đã lưu</string>
     <string name="search_google_data">Từ Google</string>
+    <string name="memory_detail_add_img">Thêm</string>
     <!--    location detail-->
     <string name="location_info">Th.Tin</string>
     <string name="list_memories">Kỉ niệm</string>
@@ -42,6 +43,9 @@
     <string name="app_intent_name">Bộ chỉnh ảnh</string>
     <string name="msg_save_image_to_share">Hãy lưu ảnh trước đã!</string>
     <string name="msg_share_image">Chia sẻ</string>>
+    <string name="find_the_way">Tìm đường</string>
+    <string name="distance_not_allow_director">Điểm đến của bạn đã ở rất gần!</string>
+
 
     <!--    list activity-->
     <string name="save_img_success">Lưu thành công</string>

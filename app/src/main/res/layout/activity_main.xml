@@ -66,6 +66,17 @@
                     android:background="#FFFFFF"
                     android:foreground="@drawable/ripple"
                     android:src="@drawable/ic_search" />
+
+                <com.victor.loading.rotate.RotateLoading
+                    android:id="@+id/rotateloading"
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="-46dp"
+                    android:background="#FFFFFF"
+                    app:loading_width="1dp"
+                    app:loading_color="#3C3C3C"
+                    android:layout_centerInParent="true"/>
             </LinearLayout>
 
         </androidx.appcompat.widget.Toolbar>

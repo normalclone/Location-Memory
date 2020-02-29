@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Location Memories</string>
+    <string name="app_name" translatable="false">Memories of Location</string>
     <string name="access_token" translatable="false" >pk.eyJ1Ijoibm9ybWFsY2xvbmUiLCJhIjoiY2s1MnBhaHh1MDA4eDNtcXRkN2w3cnhmZiJ9.85mOapfwMm8ly7W3GNZlmw</string>
     <string name="google_api" translatable="false">AIzaSyAYFaGdkbUT63qa-OUh5NvmgVkRtHu0U3w</string>
     <string name="navigation_drawer_open" translatable="false">Open drawer</string>
@@ -25,8 +25,10 @@
     <string name="delete">Delete</string>
     <string name="search_saved_data">Saved locations</string>
     <string name="search_google_data">From Google</string>
+    <string name="memory_detail_add_img">Add</string>
 
-<!--    photo editor-->
+
+    <!--    photo editor-->
     <string name="label_brush">Brush</string>
     <string name="label_emoji">Emoji</string>
     <string name="label_sticker">Sticker</string>
@@ -50,7 +52,8 @@
     <string name="confirm">Confirm</string>
     <string name="change_success">Change information success!</string>
     <string name="change_fail">Change information fail!</string>
-
+    <string name="find_the_way">Find the Way</string>
+    <string name="distance_not_allow_director">Your target location smaller than 10m! Find it your self please</string>
 
 <!--    list activity-->
     <string name="save_img_success">Image Saved Successfully</string>

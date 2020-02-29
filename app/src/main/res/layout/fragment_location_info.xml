@@ -74,6 +74,15 @@
                 android:layout_height="wrap_content"
                 app:strokeColor="#000"
                 android:text="@string/edit_this_location"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_director"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_margin="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:strokeColor="#000"
+                android:text="@string/find_the_way"/>
         </LinearLayout>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
